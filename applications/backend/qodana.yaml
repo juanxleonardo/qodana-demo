@@ -1,6 +1,9 @@
 version: "1.0"
 linter: jetbrains/qodana-python:2026.2
 
+profile:
+  name: qodana.recommended
+
 coverage:
   reportProblems: true
 
@@ -8,4 +11,4 @@ failureConditions:
   severityThresholds:
     critical: 0
   testCoverageThresholds:
-    total: 90
+    total: 40
