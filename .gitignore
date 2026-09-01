@@ -1,0 +1,9 @@
+node_modules/
+coverage/
+*.pyc
+__pycache__/
+.venv/
+.pytest_cache/
+coverage.xml
+.qodana/
+.coverage

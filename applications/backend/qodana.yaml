@@ -1,0 +1,5 @@
+version: "1.0"
+linter: jetbrains/qodana-python:2026.2
+
+coverage:
+  reportProblems: true

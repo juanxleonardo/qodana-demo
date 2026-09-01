@@ -1,0 +1,40 @@
+name: Qodana - frontend
+
+on:
+  pull_request:
+    paths: ['applications/frontend/**']
+  push:
+    branches: [development, main]
+    paths: ['applications/frontend/**']
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: applications/frontend
+        run: npm ci
+
+      - name: Run tests with coverage
+        working-directory: applications/frontend
+        run: npm run test:coverage -- --coverageReporters=lcov
+
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@v2026.2.0
+        with:
+          project-dir: applications/frontend
+          upload-result: true
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_FRONTEND }}

@@ -1,0 +1,40 @@
+name: Qodana - backend
+
+on:
+  pull_request:
+    paths: ['applications/backend/**']
+  push:
+    branches: [development, main]
+    paths: ['applications/backend/**']
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        working-directory: applications/backend
+        run: pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        working-directory: applications/backend
+        run: pytest --cov=src --cov-report=xml:coverage.xml
+
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@v2026.2.0
+        with:
+          project-dir: applications/backend
+          upload-result: true
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_BACKEND }}
