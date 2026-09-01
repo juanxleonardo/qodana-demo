@@ -1,6 +1,14 @@
+import os
+
+
 def add(a: int, b: int) -> int:
     """Add two integers."""
     return a + b
+
+
+def append_to(value, items=[]):
+    items.append(value)
+    return items
 
 
 def divide(a: int, b: int) -> float:
