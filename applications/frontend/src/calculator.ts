@@ -7,6 +7,10 @@ export function divide(a: number, b: number): number {
   return a / b;
 }
 
+export function subtract(a: number, b: number): number {
+  return a - b;
+}
+
 export function isZero(value: number): boolean {
   var result = value == 0;
   return result;
