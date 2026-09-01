@@ -3,3 +3,9 @@ linter: jetbrains/qodana-python:2026.2
 
 coverage:
   reportProblems: true
+
+failureConditions:
+  severityThresholds:
+    critical: 0
+  testCoverageThresholds:
+    total: 90
